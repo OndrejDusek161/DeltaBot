@@ -2,10 +2,6 @@
 
 Programy a funkce pro kinematickou analýzu lineárního deltabota.
 
-## Obsah
-- [Programy](#programy)
-- [Složky](#složky)
-
 ## Programy
 
 Seznam důležitých programů obsažených v projektu:
@@ -21,3 +17,8 @@ Seznam důležitých programů obsažených v projektu:
 
 Struktura složek projektu:
 - **PracovniPlochy:** Složka pro ukládání pracovních ploch
+
+---
+
+*Děkujeme za váš zájem o tento projekt!*
+

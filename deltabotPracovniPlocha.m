@@ -18,8 +18,9 @@ konec = [x5,y5,z5];
 vykresleni_deltabot(rozmer,konec); 
 i = 1;
 calculate = 0;
-tic
-%% Vypocty
+
+%tic         %časování výpočtů
+%% Výpočty pracovní plochy
 if calculate == 1
     data = zeros(7,135*135*135);
     for Uos = 100:10:370
@@ -35,7 +36,7 @@ if calculate == 1
                 
                 data(1,i) = xos;
                 data(2,i) = yos;
-                data(3,i) = -zos;
+                data(3,i) = zos;
                 data(4,i) = Uos;
                 data(5,i) = Vos;
                 data(6,i) = Wos;
@@ -52,7 +53,7 @@ if calculate == 1
     %writematrix(data,"prac_plocha_tyc_500mm.txt");
     %writematrix(data,"prac_plocha_tyc_600mm.txt");
 end
-toc
+%toc
 
 %vykresleni pracovni plochy
 %data = readmatrix("prac_plocha_tyc_500mm_prim_maxUhel_40_ver2.txt");

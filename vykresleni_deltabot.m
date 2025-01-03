@@ -68,23 +68,24 @@ w1.z = w1.z;
 % z_3 = polomer * z_3 + center3(3);
 
 figure
-grid on
+
 view(3)
-plot3(u1.x, u1.y, u1.z, 'b-', LineWidth=2)
+grid on
+plot3(u1.x, u1.y, u1.z, 'b-', LineWidth=2, DisplayName="Rameno U")
 hold on
-plot3(v1.x, v1.y, v1.z, 'g-', LineWidth=2)
-plot3(w1.x, w1.y, w1.z, 'r-', LineWidth=2)
+plot3(v1.x, v1.y, v1.z, 'g-', LineWidth=2, DisplayName="Rameno V")
+plot3(w1.x, w1.y, w1.z, 'r-', LineWidth=2, DisplayName="Rameno W")
 % plot3(linex,liney,linez,'k-', LineWidth=4);
 % surf(x_1, y_1, z_1, 'FaceColor', [0.3,0.3,0.8], 'FaceAlpha', transp, "LineStyle",":");
 % surf(x_2, y_2, z_2, 'FaceColor', [0.3,0.8,0.3], 'FaceAlpha',transp, "LineStyle",":");
 % surf(x_3, y_3, z_3, 'FaceColor', [0.3,0.3,0.8], 'FaceAlpha',transp, "LineStyle",":");
 axis("equal")
-scatter3(0,0,0,'x', 'k');
-scatter3(x5,y5,z5,'o', 'filled', 'k');
+scatter3(0,0,0,'x', 'k', 'HandleVisibility', 'off');
+scatter3(x5,y5,z5,'o', 'filled', 'k', 'HandleVisibility', 'off');
 xlabel x[mm]
 ylabel y[mm]
 zlabel z[mm]
 title("Deltabot")
-
+legend('show')
 % exportgraphics(fig, "Prima.png", "Resolution",600)
 end

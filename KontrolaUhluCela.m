@@ -1,32 +1,30 @@
 
+syms d1 d2 d3 d4 d5 x5 y5 z5 U V W
 
-
-%syms d(1 d(2) d(3) d(4) d(5) x5 y5 z5 U V W
-
-d(1) = 50; %offset
-d(2) = 370; % rameno
-d(3) = 50; % offset od ramena
-d(4) = 500; %karbon tyc
-d(5) = 50; %offset k konec bodu
-rozmer = [d(1),d(2),d(3),d(4),d(5)];
-x5 = 0;
-y5 = -100;
-z5 = -300;
-konec = [x5,y5,z5];
-[U, V, W] = InverzniKinematika([d(1),d(2),d(3),d(4),d(5)], [x5,y5,z5]);
+% d1 = 50; %offset
+% d2 = 370; % rameno
+% d3 = 50; % offset od ramena
+% d4 = 500; %karbon tyc
+% d5 = 50; %offset k konec bodu
+% rozmer = [d1,d2,d3,d4,d5];
+% x5 = 0;
+% y5 = -100;
+% z5 = -300;
+% konec = [x5,y5,z5];
+% [U, V, W] = InverzniKinematika([d1,d2,d3,d4,d5], [x5,y5,z5]);
 
 u = struct( ...
-    'x', [0, d(1),            d(1)+U*sind(45),  d(1)+U*sind(45)+d(3)*cosd(45),            x5+d(5),             x5], ...
+    'x', [0, d1,            d1+U*sind(45),  d1+U*sind(45)+d3*cosd(45),            x5+d5,             x5], ...
     'y', [0, 0,             0,               0,                                    y5,               y5], ...
-    'z', [0, 0,             U*cosd(45),    -d(3)*sind(45)+U*cosd(45),               z5,                z5]);
+    'z', [0, 0,             U*cosd(45),    -d3*sind(45)+U*cosd(45),               z5,                z5]);
 v = struct( ...
-    'x', [0, -cosd(60)*d(1), -cosd(60)*(d(1)+V*sind(45)), -cosd(60)*(d(1)+V*sind(45)+d(3)*cosd(45)), x5-d(5)*cosd(60), x5], ...
-    'y', [0, -sind(60)*d(1), -sind(60)*(d(1)+V*sind(45)), -sind(60)*(d(1)+V*sind(45)+d(3)*cosd(45)), y5-d(5)*sind(60), y5], ...
-    'z', [0, 0,             V*cosd(45),                -d(3)*sind(45)+V*cosd(45),               z5,             z5]);
+    'x', [0, -cosd(60)*d1, -cosd(60)*(d1+V*sind(45)), -cosd(60)*(d1+V*sind(45)+d3*cosd(45)), x5-d5*cosd(60), x5], ...
+    'y', [0, -sind(60)*d1, -sind(60)*(d1+V*sind(45)), -sind(60)*(d1+V*sind(45)+d3*cosd(45)), y5-d5*sind(60), y5], ...
+    'z', [0, 0,             V*cosd(45),                -d3*sind(45)+V*cosd(45),               z5,             z5]);
 w = struct( ...
-    'x', [0, -cosd(60)*d(1), -cosd(60)*(d(1)+W*sind(45)), -cosd(60)*(d(1)+W*sind(45)+d(3)*cosd(45)), x5-d(5)*cosd(60), x5], ...
-    'y', [0, sind(60)*d(1),   sind(60)*(d(1)+W*sind(45)),  sind(60)*(d(1)+W*sind(45)+d(3)*cosd(45)), y5+d(5)*sind(60), y5], ...
-    'z', [0, 0,             W*cosd(45),               -d(3)*sind(45)+W*cosd(45),               z5,             z5]);
+    'x', [0, -cosd(60)*d1, -cosd(60)*(d1+W*sind(45)), -cosd(60)*(d1+W*sind(45)+d3*cosd(45)), x5-d5*cosd(60), x5], ...
+    'y', [0, sind(60)*d1,   sind(60)*(d1+W*sind(45)),  sind(60)*(d1+W*sind(45)+d3*cosd(45)), y5+d5*sind(60), y5], ...
+    'z', [0, 0,             W*cosd(45),               -d3*sind(45)+W*cosd(45),               z5,             z5]);
 
 %% Rameno U
 Au = [u.x(1),u.y(1)]
@@ -39,7 +37,7 @@ eu = sqrt((Du(1) - Bu(1))^2+(Du(2) - Bu(2))^2)
 bu = sqrt((Du(1) - Eu(1))^2+(Du(2) - Eu(2))^2)
 du = sqrt((Eu(1) - Bu(1))^2+(Eu(2) - Bu(2))^2)
 alfaU = acos((bu^2+eu^2-du^2)/(2*eu*bu))*180/pi
-
+alfaU = simplify(alfaU)
 
 %rameno V
 Av = [v.x(1),v.y(1)];
@@ -52,6 +50,7 @@ ev = sqrt((Bv(1) - Dv(1))^2+(Bv(2) - Dv(2))^2);
 bv = sqrt((Ev(1) - Dv(1))^2+(Ev(2) - Dv(2))^2);
 dv = sqrt((Ev(1) - Bv(1))^2+(Ev(2) - Bv(2))^2);
 alfaV = acos((bv^2+ev^2-dv^2)/(2*ev*bv))*180/pi
+alfaV = simplify(alfaV)
 %rameno V
 Aw = [w.x(1),w.y(1)];
 Bw = [w.x(2),w.y(2)];
@@ -63,5 +62,4 @@ ew = sqrt((Bw(1) - Dw(1))^2+(Bw(2) - Dw(2))^2);
 bw = sqrt((Ew(1) - Dw(1))^2+(Ew(2) - Dw(2))^2);
 dw = sqrt((Ew(1) - Bw(1))^2+(Ew(2) - Bw(2))^2);
 alfaW = acos((bw^2+ew^2-dw^2)/(2*ew*bw))*180/pi
-
-vykresleni_deltabot(rozmer,konec);
+alfaW = simplify(alfaW)

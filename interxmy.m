@@ -4,7 +4,7 @@ Function information
 Function to calculate intersection of three spheres
 Returns NAN if no intersection or some bad condition encountered
 X1, X2, X3 are vectors of centers of three spheres
-r, r, r are radii of the three spheres
+r is radii of the three spheres
 pos =0 for lower point and 1 for higher point
 Computation Code calculated in (and copied from) Maple
 For questions/suggestions, contact hrishi.shah2002@gmail.com
